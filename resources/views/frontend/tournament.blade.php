@@ -37,7 +37,7 @@
               Daftarkan timmu, ikuti pertandingan, dan rebutlah tahta juara!
             </p>
           </div>
-          <a href="Create_Tournament.html">Create Tournament</a>
+          <a href="{{route('createtour')}}">Create Tournament</a>
         </div>
       </section>
 

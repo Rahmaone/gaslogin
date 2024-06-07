@@ -6,6 +6,8 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::get('/', [LoginController::class, 'indexadmin'])->name('login');
 
 Route::get('/enkripsi', [BelajarController::class, 'enkripsi'])->name('enkripsi');
 Route::get('/enkripsi-detail/{params}', [BelajarController::class, 'enkripsi_detail'])->name('enkripsi-detail');
@@ -83,16 +85,27 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
     });
 });
 
-//GasloginRoute
-Route::get('/home', [HomeController::class, 'home'])->name('home');
-Route::get('/createtour', [HomeController::class, 'createtour'])->name('createtour');
-Route::get('/detailtour', [HomeController::class, 'detailtour'])->name('detailtour');
-Route::get('/detailtourvalo', [HomeController::class, 'detailtourvalo'])->name('detailtourvalo');
-Route::get('/detaildonation', [HomeController::class, 'detaildonation'])->name('detaildonation');
-Route::get('/mainblog', [HomeController::class, 'mainblog'])->name('mainblog');
-Route::get('/about', [HomeController::class, 'about'])->name('about');
-Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-Route::get('/tournament', [HomeController::class, 'tournament'])->name('tournament');
-Route::get('/login', [UserLoginController::class, 'login_proses'])->name('login');
+//GuestRoute
+Route::get('/home', [GuestController::class, 'home'])->name('home');
+Route::get('/detailtour', [GuestController::class, 'detailtour'])->name('detailtour');
+Route::get('/detailtourvalo', [GuestController::class, 'detailtourvalo'])->name('detailtourvalo');
+Route::get('/detaildonation', [GuestController::class, 'detaildonation'])->name('detaildonation');
+Route::get('/mainblog', [GuestController::class, 'mainblog'])->name('mainblog');
+Route::get('/about', [GuestController::class, 'about'])->name('about');
+Route::get('/blog', [GuestController::class, 'blog'])->name('blog');
+Route::get('/contact', [GuestController::class, 'contact'])->name('contact');
+Route::get('/tournament', [GuestController::class, 'tournament'])->name('tournament');
 
+//UserOnlyRoute
+Route::get('/createtour', [UserController::class, 'createtour'])->name('createtour');
+
+//UserAuthRoute
+Route::get('/login', [LoginController::class, 'indexuser'])->name('loginUser');
+Route::post('/loginproses', [LoginController::class, 'loginproses'])->name('loginproses');
+Route::get('/forgotpassword', [LoginController::class,'forgotpassworduser'])->name('forgotpassworduser');
+Route::post('/forgotpassworduseract', [LoginController::class, 'forgotpassworduseract'])->name('forgotpassworduseract');
+Route::get('/registeruser', [LoginController::class,'registeruser'])->name('registeruser');
+Route::post('/registerprosesuser', [LoginController::class,'registerprosesuser'])->name('registerprosesuser');
+Route::get('/logoutuser', [LoginController::class,'logoutuser'])->name('logoutuser');
+Route::get('/validasiforgotpassworduser/{token}', [LoginController::class, 'validasiforgotpassworduser'])->name('validasiforgotpassworduser');
+Route::post('/validasiforgotpasswordactuser', [LoginController::class, 'validasiforgotpasswordactuser'])->name('validasiforgotpasswordactuser');

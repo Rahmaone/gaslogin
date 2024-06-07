@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="login-content">
-        <form action="{{ route('admin.user.store') }}" method="post">
+        <form action="{{ route('registerprosesuser') }}" method="post">
           @csrf
           <a href="index.html" id="login-image"
             ><img src="assets/images/login.png"
@@ -43,7 +43,7 @@
             </div>
             <div class="div">
               <h5>Username</h5>
-              <input type="text" name="name" class="input" />
+              <input type="text" name="nama" class="input" />
               @error('name')
                   <span class="text-danger">{{ $message }}</span>
               @enderror

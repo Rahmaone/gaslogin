@@ -25,13 +25,13 @@
           <p>
             Daftar sekarang dan akses beragam fitur eksklusif kami dengan mudah!
           </p>
-          <a href="register.html" id="register-link"
+          <a href="{{route('registeruser')}}" id="register-link"
             ><button id="to-register">Daftar</button></a
           >
         </div>
       </div>
       <div class="login-content">
-        <form action="{{ route('proses_login') }}" method="POST">
+        <form action="{{ route('loginproses') }}" method="POST">
           @csrf
           <a href="index.html" id="login-image"
             ><img src="assets/images/login.png"
@@ -66,12 +66,12 @@
               <input type="checkbox" />
               <span> Ingat Saya</span>
             </label>
-            <a href="#">Lupa password?</a>
+            <a href="{{route('forgotpassworduser')}}">Lupa password?</a>
           </div>
           <input type="submit" class="btn-logreg" value="Login" />
           <div class="login-register">
             <label for="register-checkbox">Belum memiliki akun?</label>
-            <a href="{{route('register')}}" id="register-link">Daftar</a>
+            <a href="{{route('registeruser')}}" id="register-link">Daftar</a>
           </div>
         </form>
       </div>
