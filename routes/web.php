@@ -82,3 +82,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
         Route::post('/import-proses', [BelajarController::class, 'import_proses'])->name('import-proses');
     });
 });
+
+//GasloginRoute
+Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::get('/createtour', [HomeController::class, 'createtour'])->name('createtour');
+Route::get('/detailtour', [HomeController::class, 'detailtour'])->name('detailtour');
+Route::get('/detailtourvalo', [HomeController::class, 'detailtourvalo'])->name('detailtourvalo');
+Route::get('/detaildonation', [HomeController::class, 'detaildonation'])->name('detaildonation');
+Route::get('/mainblog', [HomeController::class, 'mainblog'])->name('mainblog');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/tournament', [HomeController::class, 'tournament'])->name('tournament');
+Route::get('/login', [UserLoginController::class, 'login_proses'])->name('login');
+
