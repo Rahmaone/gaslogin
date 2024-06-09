@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\GeneralController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -85,27 +86,31 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
     });
 });
 
-//GuestRoute
-Route::get('/home', [GuestController::class, 'home'])->name('home');
-Route::get('/detailtour', [GuestController::class, 'detailtour'])->name('detailtour');
-Route::get('/detailtourvalo', [GuestController::class, 'detailtourvalo'])->name('detailtourvalo');
-Route::get('/detaildonation', [GuestController::class, 'detaildonation'])->name('detaildonation');
-Route::get('/mainblog', [GuestController::class, 'mainblog'])->name('mainblog');
-Route::get('/about', [GuestController::class, 'about'])->name('about');
-Route::get('/blog', [GuestController::class, 'blog'])->name('blog');
-Route::get('/contact', [GuestController::class, 'contact'])->name('contact');
-Route::get('/tournament', [GuestController::class, 'tournament'])->name('tournament');
+// GeneralRoute
+Route::get('/home', [GeneralController::class, 'home'])->name('home');
+Route::get('/detailtour', [GeneralController::class, 'detailtour'])->name('detailtour');
+Route::get('/detailtourvalo', [GeneralController::class, 'detailtourvalo'])->name('detailtourvalo');
+Route::get('/detaildonation', [GeneralController::class, 'detaildonation'])->name('detaildonation');
+Route::get('/mainblog', [GeneralController::class, 'mainblog'])->name('mainblog');
+Route::get('/about', [GeneralController::class, 'about'])->name('about');
+Route::get('/blog', [GeneralController::class, 'blog'])->name('blog');
+Route::get('/contact', [GeneralController::class, 'contact'])->name('contact');
+Route::get('/tournament', [GeneralController::class, 'tournament'])->name('tournament');
 
-//UserOnlyRoute
-Route::get('/createtour', [UserController::class, 'createtour'])->name('createtour');
+// UserOnlyRoute
+Route::group(['middleware' => ['isPengguna_Biasa']], function () {
+    Route::get('/createtour', [UserController::class, 'createtour'])->name('createtour');
+    Route::get('/logout', [UserController::class,'logoutuser'])->name('logoutuser');
+});
 
-//UserAuthRoute
-Route::get('/login', [LoginController::class, 'indexuser'])->name('loginUser');
-Route::post('/loginproses', [LoginController::class, 'loginproses'])->name('loginproses');
-Route::get('/forgotpassword', [LoginController::class,'forgotpassworduser'])->name('forgotpassworduser');
-Route::post('/forgotpassworduseract', [LoginController::class, 'forgotpassworduseract'])->name('forgotpassworduseract');
-Route::get('/registeruser', [LoginController::class,'registeruser'])->name('registeruser');
-Route::post('/registerprosesuser', [LoginController::class,'registerprosesuser'])->name('registerprosesuser');
-Route::get('/logoutuser', [LoginController::class,'logoutuser'])->name('logoutuser');
-Route::get('/validasiforgotpassworduser/{token}', [LoginController::class, 'validasiforgotpassworduser'])->name('validasiforgotpassworduser');
-Route::post('/validasiforgotpasswordactuser', [LoginController::class, 'validasiforgotpasswordactuser'])->name('validasiforgotpasswordactuser');
+// GuestRoute
+Route::group(['middleware' => ['isGuest']], function () {
+    Route::get('/login', [GuestController::class, 'indexuser'])->name('loginUser');
+    Route::post('/loginproses', [GuestController::class, 'loginproses'])->name('loginproses');
+    Route::get('/forgotpassword', [GuestController::class,'forgotpassworduser'])->name('forgotpassworduser');
+    Route::post('/forgotpassworduseract', [GuestController::class, 'forgotpassworduseract'])->name('forgotpassworduseract');
+    Route::get('/registeruser', [GuestController::class,'registeruser'])->name('registeruser');
+    Route::post('/registerprosesuser', [GuestController::class,'registerprosesuser'])->name('registerprosesuser');
+    Route::get('/validasiforgotpassworduser/{token}', [GuestController::class, 'validasiforgotpassworduser'])->name('validasiforgotpassworduser');
+    Route::post('/validasiforgotpasswordactuser', [GuestController::class, 'validasiforgotpasswordactuser'])->name('validasiforgotpasswordactuser');
+});

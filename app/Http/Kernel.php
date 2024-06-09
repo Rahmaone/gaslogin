@@ -67,10 +67,10 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
-        'redirect.guest' => \App\Http\Middleware\RedirectGuestToLoginUser::class,
     ];
 
     protected $routeMiddleware = [
-        'redirect.guest' => \App\Http\Middleware\RedirectGuestToLoginUser::class,
+        'isPengguna_Biasa' => \App\Http\Middleware\isPengguna_Biasa::class,
+        'isGuest' => \App\Http\Middleware\isGuest::class,
     ];
 }

@@ -25,7 +25,7 @@
           <p>
             Masuk sekarang untuk mengakses profil Anda dan fitur-fitur lainnya.
           </p>
-          <a href="login.html" id="register-link"
+          <a href={{route('loginUser')}} id="register-link"
             ><button id="to-register">Masuk</button></a
           >
         </div>
@@ -77,7 +77,7 @@
           <input type="submit" class="btn-logreg" value="Daftar" />
           <div class="login-register">
             <label for="register-checkbox">Sudah memiliki akun?</label>
-            <a href="{{route('login')}}" id="register-link">Login</a>
+            <a href="{{route('loginUser')}}" id="register-link">Login</a>
           </div>
         </form>
       </div>

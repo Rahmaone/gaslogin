@@ -66,7 +66,7 @@
           </li>
           <li>
             @auth
-            <a href="{{route('logout')}}">
+            <a href="{{route('logoutuser')}}">
               <button style="color: hsl(31, 100%, 51%)">
                 <span>logout</span>
               </button></a
@@ -103,7 +103,7 @@
             </button>
         </a>
     
-        <form id="logout-form" action="{{ route('logout') }}" method="GET" style="display: none;">
+        <form id="logout-form" action="{{ route('logoutuser') }}" method="GET" style="display: none;">
             @csrf
         </form>
         @endauth

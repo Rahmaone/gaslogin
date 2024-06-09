@@ -22,7 +22,6 @@ class HomeController extends Controller
         $userCount = User::count();
         return view('dashboard', ['userCount' => $userCount]);
 
-        return abort(403);
     }
 
     public function index(Request $request)
